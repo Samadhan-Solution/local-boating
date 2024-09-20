@@ -1,3 +1,4 @@
+/* version = 2024092001 */
 function hideSubmitButton() {
 
     var ready_to_submit = false;
@@ -7,9 +8,11 @@ function hideSubmitButton() {
         var score_got = score[0].innerText;
         var score_max = score[1].innerText;
 
-        if(score_got === score_max){
+        if (score_got === score_max) {
             ready_to_submit = true;
         }
+    }
+
 
     var elements = querySelectorAllInIframes('.h5p-interactive-book-summary-submit');
 
@@ -21,28 +24,30 @@ function hideSubmitButton() {
             button[0].style.display = 'inline-flex';
             }
         }
-    }
 }
 
-
-var refreshIntervalId = setInterval(hideSubmitButton, 1000);
-hideSubmitButton();
 
 function querySelectorAllInIframes(selector) {
     let elements = [];
 
     const recurse = (contentWindow = window) => {
-        const iframes = contentWindow.document.body.querySelectorAll('iframe');
-        iframes.forEach(iframe => recurse(iframe.contentWindow));
+        try {
+            const iframes = contentWindow.document.body.querySelectorAll('iframe');
+            iframes.forEach(iframe => recurse(iframe.contentWindow));
 
-        const found = contentWindow.document.body.querySelectorAll(selector);
-
-
-        if(found.length > 0){
-            elements = elements.concat(found);
+            const found = contentWindow.document.body.querySelectorAll(selector);
+            if (found.length > 0) {
+                elements = elements.concat(found);
+            }
+        }
+        catch (err){
+          //  console.log("Error happened" + JSON.stringify(err));
         }
     }
 
     recurse();
     return elements;
 };
+
+var refreshIntervalId = setInterval(hideSubmitButton, 1000);
+hideSubmitButton();
