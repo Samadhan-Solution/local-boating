@@ -18,10 +18,22 @@ function hideSubmitButton() {
 
     for (const button of elements) {
         if(ready_to_submit == false) {
-            button[0].style.display = 'none';
+            if(button[0].dataset.submit !== 'N') {
+                button[0].dataset.submit = 'N';
+                button[0].innerHTML = "Check! You have missed something.<span class=\"icon-paper-pencil\" aria-hidden=\"true\"></span>";
+                button[0].style.backgroundColor = "#dc3545";
+                button[0].style.border = "1px solid #dc3545";
+                button[0].disabled = true;
             }
+        }
         else{
-            button[0].style.display = 'inline-flex';
+            if(button[0].dataset.submit !== 'Y') {
+                button[0].dataset.submit = 'Y';
+                button[0].innerHTML = "Well done! Press this submit button.<span class=\"icon-paper-pencil\" aria-hidden=\"true\"></span>";
+                button[0].style.backgroundColor = "#198754";
+                button[0].style.border = "1px solid #198754";
+                button[0].disabled = false;
+                }
             }
         }
 }

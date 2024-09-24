@@ -29,7 +29,7 @@ defined('MOODLE_INTERNAL') || die();
 /**
  * local_greetings_before_footer
  *
- * @param navigation_node $frontpage Node representing the front page in the navigation tree.
+ *
  */
 function local_boating_before_footer() {
     global $PAGE;
